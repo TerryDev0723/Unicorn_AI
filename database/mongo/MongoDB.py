@@ -40,12 +40,14 @@ class MongoDB:
 
     def aggregate(self, pipeline):
         result = self.collection.aggregate(pipeline)
+        res = list(result)
         try:
-            skus = [r["sku"] for r in list(result)]
-
-            return skus, True
+            skus = [r["sku"] for r in res]
+            flag = True
         except:
-            return list(result), False
+            skus = res
+            flag = False
+        return skus, flag
 
         
 
