@@ -42,10 +42,12 @@ class MongoDB:
         result = self.collection.aggregate(pipeline)
         try:
             skus = [r["sku"] for r in list(result)]
-        except:
-            skus = []
 
-        return skus
+            return skus, True
+        except:
+            return list(result), False
+
+        
 
 
 

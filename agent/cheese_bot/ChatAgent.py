@@ -85,15 +85,18 @@ class ChatAgent():
 
             if filter_data["search_type"]:
                 skus = list(self.mongo.get_skus(filter_data["filter"], filter_data["sort"], filter_data["limit"]))
+                flag = True
             else:
-                skus = list(self.mongo.aggregate(filter_data["pipeline"]))
-                if len(skus) == 0:
-                    skus = list(self.mongo.get_skus(filter_data["filter"], filter_data["sort"], 1000))
+                skus, flag = list(self.mongo.aggregate(filter_data["pipeline"]))
             print(skus)
 
-            results = self.search_pinecone(query, {"sku": {"$in": skus}}, filter_data["limit"])
+            if flag:
+                results = self.search_pinecone(query, {"sku": {"$in": skus}}, filter_data["limit"])
+                context = "\n\n-----------------------------------------\n\n".join([json.dumps(result.get('metadata', {}), indent=4, ensure_ascii=False, sort_keys=False) for result in results])
+            else:
+                results = skus
+                context = json.dumps(results, indent=4, ensure_ascii=False, sort_keys=False)
             print(f"      results: {len(results)}")
-            context = "\n\n-----------------------------------------\n\n".join([json.dumps(result.get('metadata', {}), indent=4, ensure_ascii=False, sort_keys=False) for result in results])
 
             prompts = [{"role": "developer", "content": system + context}] + self.messages + [{"role": "user", "content": query}]
             stream = client.chat.completions.create(
