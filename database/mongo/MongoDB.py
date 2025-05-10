@@ -12,8 +12,8 @@ class MongoDB:
             client.admin.command('ismaster')
             print("MongoDB connection successful!")
             self.collection = client[os.environ["MONGODB_NAME"]]["cheese"]
-        except ConnectionFailure:
-            print("MongoDB connection failed!")
+        except ConnectionFailure as e:
+            print("MongoDB connection failed!", e)
             return None
 
     def update(self):
