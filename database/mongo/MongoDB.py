@@ -27,7 +27,10 @@ class MongoDB:
         self.collection.delete_many({"sku": {"$nin": skus}})
 
     def get_skus(self, query, sort, limit):
-        result = self.collection.find(query).sort(sort).limit(limit)
+        result = self.collection.find(query)
+        if len(sort):
+            result = result.sort(sort)
+        result = result.limit(limit)
         try:
             skus = [r["sku"] for r in list(result)]
         except:
