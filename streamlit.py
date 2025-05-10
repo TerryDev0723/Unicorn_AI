@@ -158,6 +158,10 @@ if __name__ == "__main__":
                 del st.session_state.action_counter
             st.rerun()
         st.markdown("---")
+        if st.session_state.mongo.collection:
+            st.write("Yes")
+        else:
+            st.write("No")
         st.subheader("About")
         st.info("Demo chatbot built with Streamlit.")
 
