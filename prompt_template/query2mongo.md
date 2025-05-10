@@ -19,8 +19,9 @@ Based on the user's LATEST query and the conversation history, generate a JSON o
 4. "pipeline" : A list of mongo aggregation states for aggregation.
    - Use only mongoDB aggregation expressions such as "$gt", "$group", "$unwind" and "$and" as operator.
 5. "limit" : An integer representing the number of results to retrieve.
-   - Range is 1~100.
+   - Range is 1~1000.
    - The value must be enough for mongo to find correct answer.
+   - If the query asks to count all, this value must be as large as possible, i.e, 1000.
 - If no specific filters are discernible for any of the available fields, i.e, the "filter" object is empty, "limit" must be large, e.g, 30
 - Consider the entire conversation history for context, but focus on the LATEST query.
 - Output ONLY the JSON object.

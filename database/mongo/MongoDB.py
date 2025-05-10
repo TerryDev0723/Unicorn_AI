@@ -7,13 +7,12 @@ import certifi # Make sure to import certifi
 class MongoDB:
     def __init__(self):
         try:
-            print(os.environ["MONGODB_URL"])
             client = MongoClient(os.environ["MONGODB_URL"], tlsCAFile=certifi.where())
             client.admin.command('ismaster')
             print("MongoDB connection successful!")
             self.collection = client[os.environ["MONGODB_NAME"]]["cheese"]
-        except ConnectionFailure as e:
-            print("MongoDB connection failed!", e)
+        except ConnectionFailure:
+            print("MongoDB connection failed!")
             return None
 
     def update(self):
@@ -29,7 +28,10 @@ class MongoDB:
 
     def get_skus(self, query, sort, limit):
         result = self.collection.find(query).sort(sort).limit(limit)
-        skus = [r["sku"] for r in list(result)]
+        try:
+            skus = [r["sku"] for r in list(result)]
+        except:
+            skus = []
 
         return skus
 

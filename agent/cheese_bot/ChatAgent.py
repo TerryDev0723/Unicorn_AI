@@ -87,6 +87,8 @@ class ChatAgent():
                 skus = list(self.mongo.get_skus(filter_data["filter"], filter_data["sort"], filter_data["limit"]))
             else:
                 skus = list(self.mongo.aggregate(filter_data["pipeline"]))
+                if len(skus) == 0:
+                    skus = list(self.mongo.get_skus(filter_data["filter"], filter_data["sort"], 1000))
             print(skus)
 
             results = self.search_pinecone(query, {"sku": {"$in": skus}}, filter_data["limit"])
