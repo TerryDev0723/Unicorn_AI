@@ -3,7 +3,6 @@ import time
 import re # For regex-based image URL detection
 
 from dotenv import load_dotenv
-load_dotenv('.env')
 
 from database.pinecone.PineconeIndex import PineconeIndex
 from database.mongo.MongoDB import MongoDB
