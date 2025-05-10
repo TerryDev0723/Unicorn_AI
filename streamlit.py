@@ -2,8 +2,6 @@ import streamlit as st
 import time
 import re # For regex-based image URL detection
 
-from dotenv import load_dotenv
-
 from database.pinecone.PineconeIndex import PineconeIndex
 from database.mongo.MongoDB import MongoDB
 from agent.cheese_bot.ChatAgent import ChatAgent
