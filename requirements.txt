@@ -1,0 +1,6 @@
+pymongo
+openai
+pinecone
+pyppeteer
+nest_asyncio
+beautifulsoup4
