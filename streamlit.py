@@ -190,10 +190,10 @@ if __name__ == "__main__":
                 response = text
                 message_placeholder.markdown(text, unsafe_allow_html=True)
 
-            st.session_state.count += 1
-            with open(f"response/{st.session_state.count}.md", "wb") as f:
-                f.write(response.encode())
-                f.close()
+            # st.session_state.count += 1
+            # with open(f"response/{st.session_state.count}.md", "wb") as f:
+            #     f.write(response.encode())
+            #     f.close()
 
         st.session_state.messages.append({"role": "assistant", "content": response, "avatar": "🧀"})
 
