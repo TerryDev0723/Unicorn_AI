@@ -7,6 +7,7 @@ import certifi # Make sure to import certifi
 class MongoDB:
     def __init__(self):
         try:
+            print(os.environ["MONGODB_URL"])
             client = MongoClient(os.environ["MONGODB_URL"], tlsCAFile=certifi.where())
             client.admin.command('ismaster')
             print("MongoDB connection successful!")
