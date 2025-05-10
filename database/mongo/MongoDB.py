@@ -37,7 +37,10 @@ class MongoDB:
 
     def aggregate(self, pipeline):
         result = self.collection.aggregate(pipeline)
-        skus = [r["sku"] for r in list(result)]
+        try:
+            skus = [r["sku"] for r in list(result)]
+        except:
+            skus = []
 
         return skus
 
