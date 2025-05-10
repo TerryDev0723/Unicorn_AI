@@ -4,3 +4,4 @@ pinecone
 pyppeteer
 nest_asyncio
 beautifulsoup4
+dotenv
