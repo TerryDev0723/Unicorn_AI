@@ -1,7 +1,3 @@
-from Demos.FileSecurityTest import permissions_dir_inherit
-from dotenv import load_dotenv
-load_dotenv('.env')
-
 import asyncio
 import json, os
 import nest_asyncio
