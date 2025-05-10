@@ -96,7 +96,7 @@ class ChatAgent():
             else:
                 results = skus
                 context = json.dumps(results, indent=4, ensure_ascii=False, sort_keys=False)
-            print(f"      results: {len(results)}")
+            print(f"      results: {len(results)}, {flag}")
 
             prompts = [{"role": "developer", "content": system + context}] + self.messages + [{"role": "user", "content": query}]
             stream = client.chat.completions.create(
