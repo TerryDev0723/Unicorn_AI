@@ -31,8 +31,9 @@ class MongoDB:
         if len(sort):
             result = result.sort(sort)
         result = result.limit(limit)
+        res = list(result)
         try:
-            skus = [r["sku"] for r in list(result)]
+            skus = [r["sku"] for r in res]
         except:
             skus = []
 

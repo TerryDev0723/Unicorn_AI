@@ -31,7 +31,10 @@ Based on the user's LATEST query and the conversation history, generate a JSON o
     result = collection.find(filter).sort(sort).limit(limit)
   - If "search_type" is false, i.e, filter mode
     result = collection.aggregate(pipeline)
-  The result must be an array that each element refers one cheese. And each element must have "sku" field that refers the sku value of cheese.
+  , and the result can be
+    - array of json data of cheeses
+    - count number that user asks
+    - any other information that user asks
 
 # Available Metadata Fields
 ### showImage
